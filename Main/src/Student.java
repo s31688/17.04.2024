@@ -23,7 +23,7 @@ public class Student {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
-        this.indexNumber = "s" + ++Main.counter;
+        this.indexNumber = "s" + (Main.counter == 7 ? Main.counter : ++Main.counter);
         students.add(this);
     }
 
@@ -84,7 +84,7 @@ public class Student {
     }
 
     public void enrollStudent(StudyProgramme studyProgramme) {
-        this.semester = studyProgramme.semester() + 1;
+        this.semester = (studyProgramme.semester() == 7 ? studyProgramme.semester() : studyProgramme.semester() + 1);
         this.status = this.semester == 1 ? "Candidate" : (this.semester == 7 ? "Graduate" : "Student");
         setStudyProgrammes(studyProgramme);
     }
