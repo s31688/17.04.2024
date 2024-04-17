@@ -1,11 +1,8 @@
-import java.util.ArrayList;
-
 public class StudyProgramme {
     private String name;
     private String summary;
     private int semester;
     private int itn;
-    private ArrayList<Integer> grades = new ArrayList<Integer>();
 
     public StudyProgramme(String name, String summary, int semester, int itn) {
         this.name = name;
@@ -30,20 +27,12 @@ public class StudyProgramme {
         return itn;
     }
 
-    public ArrayList<Integer> getGrades() {
-        return grades;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public void setGrades(ArrayList<Integer> grades) {
-        this.grades = grades;
     }
 
     public void setSemester(int semester) {

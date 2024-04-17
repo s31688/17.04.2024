@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Student {
     private String name;
@@ -8,7 +9,10 @@ public class Student {
     private String phoneNumber;
     private Date dateOfBirth;
     private String indexNumber;
-    private ArrayList<StudyProgramme> studyProgrammes = new ArrayList<>();
+    private StudyProgramme studyProgramme;
+    private String status;
+    private int semester;
+    private HashMap<Integer, String> grades = new HashMap<>();
 
     public Student(String name, String surname, String email, String address, String phoneNumber, Date dateOfBirth) {
         this.name = name;
@@ -17,7 +21,7 @@ public class Student {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
-        this.indexNumber = "s" + (int)(Math.random()*100);
+        this.indexNumber = "s" + ++Main.counter;
     }
 
     public String getName() {
@@ -48,8 +52,20 @@ public class Student {
         return indexNumber;
     }
 
-    public ArrayList<StudyProgramme> getStudyProgrammes() {
-        return studyProgrammes;
+    public StudyProgramme getStudyProgramme() {
+        return studyProgramme;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public HashMap<Integer, String> getGrades() {
+        return grades;
     }
 
     public void setName(String name) {
@@ -80,7 +96,28 @@ public class Student {
         this.indexNumber = indexNumber;
     }
 
-    public void setStudyProgrammes(ArrayList<StudyProgramme> studyProgrammes) {
-        this.studyProgrammes = studyProgrammes;
+    public void setStudyProgrammes(StudyProgramme studyProgramme) {
+        this.studyProgramme = studyProgramme;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public void setGrades(HashMap<Integer, String> grades) {
+        this.grades = grades;
+    }
+
+    public void enrollStudent(StudyProgramme studyProgramme) {
+        this.semester = studyProgramme.getSemester() + 1;
+        this.status = this.semester == 1 ? "Candidate" : (this.semester == 7 ? "Graduate" : "Student");
+    }
+
+    public void addGrade(int grade, String subject) {
+        this.grades.put(grade, subject);
     }
 }

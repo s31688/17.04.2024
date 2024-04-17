@@ -1,4 +1,6 @@
 public class Main {
+    public static int counter = 0;
+
     public static void main(String[] args) {
         Student s = new Student("John", "Doe", "doe@wp.pl", "Warsaw, Zlota 12",
                 "333-322-222", new Date(1980, 1, 1));
