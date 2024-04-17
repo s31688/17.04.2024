@@ -25,6 +25,9 @@ public class Students {
 
     public static void displayInfoAboutAllStudents() {
         setStudents();
-        System.out.println(getStudents());
+        for (Student student : students) {
+            System.out.println(student);
+            System.out.println();
+        }
     }
 }

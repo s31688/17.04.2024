@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +13,7 @@ public class Student {
     private StudyProgramme studyProgramme;
     private String status;
     private int semester;
-    private final HashMap<Integer, String> grades = new HashMap<>();
+    private final HashMap<String, Integer> grades = new HashMap<>();
     private static final ArrayList<Student> students = new ArrayList<>();
 
     public Student(String name, String surname, String email, String address, String phoneNumber, Date dateOfBirth) {
@@ -67,7 +67,7 @@ public class Student {
         return semester;
     }
 
-    public HashMap<Integer, String> getGrades() {
+    public HashMap<String, Integer> getGrades() {
         return grades;
     }
 
@@ -90,15 +90,21 @@ public class Student {
     }
 
     public void addGrade(int grade, String subject) {
-        this.grades.put(grade, subject);
+        this.grades.put(subject, grade);
     }
 
+    @Deprecated
     public String toString() {
-        return "\nStudent " + this.getSemester() + " " + this.getName() + " " + this.getSurname() + " " + this.getEmail()
-                + " " + this.getAddress() + " " + this.getPhoneNumber() + " " + this.getDateOfBirth() + " "
-                + this.getIndexNumber() + " " + this.getStudyProgramme().name() + " "
-                + this.getStudyProgramme().summary() + " " + this.getStudyProgramme().semester() + " "
-                + this.getStudyProgramme().itn() + " " + this.getStatus() + " " + this.getSemester() + " "
-                + this.getGrades() + "\n";
+         return "Student " + this.getIndexNumber()
+                 + "\nname: " + this.getName() + " " + this.getSurname()
+                 + "\nemail: " + this.getEmail()
+                + "\naddress: " + this.getAddress()
+                 + "\nphone number:" + this.getPhoneNumber()
+                 + "\ndate of birth: " + this.getDateOfBirth().getYear() + "." + this.getDateOfBirth().getMonth() +
+                 "." + this.getDateOfBirth().getDate()
+                 + "\nstudy programme: " + this.getStudyProgramme()
+                 + "\nstatus: " + this.getStatus()
+                 + "\nsemester: " + this.getSemester()
+                 + "\ngrades: " + this.getGrades();
     }
 }
