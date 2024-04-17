@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -95,16 +95,16 @@ public class Student {
 
     @Deprecated
     public String toString() {
-         return "Student " + this.getIndexNumber()
-                 + "\nname: " + this.getName() + " " + this.getSurname()
-                 + "\nemail: " + this.getEmail()
+        return "Student " + this.getIndexNumber()
+                + "\nname: " + this.getName() + " " + this.getSurname()
+                + "\nemail: " + this.getEmail()
                 + "\naddress: " + this.getAddress()
-                 + "\nphone number:" + this.getPhoneNumber()
-                 + "\ndate of birth: " + this.getDateOfBirth().getYear() + "." + this.getDateOfBirth().getMonth() +
-                 "." + this.getDateOfBirth().getDate()
-                 + "\nstudy programme: " + this.getStudyProgramme()
-                 + "\nstatus: " + this.getStatus()
-                 + "\nsemester: " + this.getSemester()
-                 + "\ngrades: " + this.getGrades();
+                + "\nphone number:" + this.getPhoneNumber()
+                + "\ndate of birth: " + this.getDateOfBirth().getYear() + "." + this.getDateOfBirth().getMonth()
+                + "." + this.getDateOfBirth().getDate()
+                + "\nstudy programme: " + this.getStudyProgramme()
+                + "\nstatus: " + this.getStatus()
+                + "\nsemester: " + this.getSemester()
+                + "\ngrades: " + this.getGrades();
     }
 }
