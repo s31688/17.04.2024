@@ -1,17 +1,20 @@
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Student {
-    private String name;
-    private String surname;
-    private String email;
-    private String address;
-    private String phoneNumber;
-    private Date dateOfBirth;
-    private String indexNumber;
+    private final String name;
+    private final String surname;
+    private final String email;
+    private final String address;
+    private final String phoneNumber;
+    private final Date dateOfBirth;
+    private final String indexNumber;
     private StudyProgramme studyProgramme;
     private String status;
     private int semester;
-    private HashMap<Integer, String> grades = new HashMap<>();
+    private final HashMap<Integer, String> grades = new HashMap<>();
+    private static final ArrayList<Student> students = new ArrayList<>();
 
     public Student(String name, String surname, String email, String address, String phoneNumber, Date dateOfBirth) {
         this.name = name;
@@ -21,6 +24,7 @@ public class Student {
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
         this.indexNumber = "s" + ++Main.counter;
+        students.add(this);
     }
 
     public String getName() {
@@ -67,52 +71,20 @@ public class Student {
         return grades;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setIndexNumber(String indexNumber) {
-        this.indexNumber = indexNumber;
+    public static ArrayList<Student> getStudents() {
+        return students;
     }
 
     public void setStudyProgrammes(StudyProgramme studyProgramme) {
         this.studyProgramme = studyProgramme;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public void setSemester(int semester) {
         this.semester = semester;
     }
 
-    public void setGrades(HashMap<Integer, String> grades) {
-        this.grades = grades;
-    }
-
     public void enrollStudent(StudyProgramme studyProgramme) {
-        this.semester = studyProgramme.getSemester() + 1;
+        this.semester = studyProgramme.semester() + 1;
         this.status = this.semester == 1 ? "Candidate" : (this.semester == 7 ? "Graduate" : "Student");
         setStudyProgrammes(studyProgramme);
     }
@@ -122,11 +94,11 @@ public class Student {
     }
 
     public String toString() {
-        return "Student " + this.getSemester() + " " + this.getName() + " " + this.getSurname() + " " + this.getEmail()
-                + " "+ this.getAddress() + " " + this.getPhoneNumber() + " " + this.getDateOfBirth().getYear() + "."
-                + this.getDateOfBirth().getMonth() + "." + this.getDateOfBirth().getDay() + " " + this.getIndexNumber()
-                + " " + this.getStudyProgramme().getName() + " " + this.getStudyProgramme().getSummary() + " "
-                + this.getStudyProgramme().getSemester() + " " + this.getStudyProgramme().getItn() + " "
-                + this.getStatus() + " " + this.getSemester() + " " + this.getGrades() + "\n";
+        return "\nStudent " + this.getSemester() + " " + this.getName() + " " + this.getSurname() + " " + this.getEmail()
+                + " " + this.getAddress() + " " + this.getPhoneNumber() + " " + this.getDateOfBirth() + " "
+                + this.getIndexNumber() + " " + this.getStudyProgramme().name() + " "
+                + this.getStudyProgramme().summary() + " " + this.getStudyProgramme().semester() + " "
+                + this.getStudyProgramme().itn() + " " + this.getStatus() + " " + this.getSemester() + " "
+                + this.getGrades() + "\n";
     }
 }
