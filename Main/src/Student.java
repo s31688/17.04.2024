@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Student {
@@ -115,9 +114,19 @@ public class Student {
     public void enrollStudent(StudyProgramme studyProgramme) {
         this.semester = studyProgramme.getSemester() + 1;
         this.status = this.semester == 1 ? "Candidate" : (this.semester == 7 ? "Graduate" : "Student");
+        setStudyProgrammes(studyProgramme);
     }
 
     public void addGrade(int grade, String subject) {
         this.grades.put(grade, subject);
+    }
+
+    public String toString() {
+        return "Student " + this.getSemester() + " " + this.getName() + " " + this.getSurname() + " " + this.getEmail()
+                + " "+ this.getAddress() + " " + this.getPhoneNumber() + " " + this.getDateOfBirth().getYear() + "."
+                + this.getDateOfBirth().getMonth() + "." + this.getDateOfBirth().getDay() + " " + this.getIndexNumber()
+                + " " + this.getStudyProgramme().getName() + " " + this.getStudyProgramme().getSummary() + " "
+                + this.getStudyProgramme().getSemester() + " " + this.getStudyProgramme().getItn() + " "
+                + this.getStatus() + " " + this.getSemester() + " " + this.getGrades() + "\n";
     }
 }

@@ -4,26 +4,27 @@ public class Students {
     private static ArrayList<Student> students = new ArrayList<>();
 
     public Students() {
-
+        students = Main.students;
     }
 
-    public ArrayList<Student> getStudents() {
+    public static ArrayList<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
+    public static void setStudents(ArrayList<Student> students) {
+        Students.students = Main.students;
     }
 
     public static void promoteAllStudents() {
-        for (int i = 0; i < students.size(); i++) {
-            if (students.get(i).getStudyProgramme().getItn() < 5) {
-                students.get(i).setSemester(students.get(i).getSemester() + 1);
+        for (Student student : students) {
+            if (student.getStudyProgramme().getItn() < 5) {
+                student.setSemester(student.getSemester() + 1);
             }
         }
     }
 
     public static void displayInfoAboutAllStudents() {
-
+        setStudents(students);
+        System.out.println(getStudents());
     }
 }
