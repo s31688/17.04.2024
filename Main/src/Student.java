@@ -1,29 +1,32 @@
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Student {
-    private final String name;
-    private final String surname;
-    private final String email;
-    private final String address;
-    private final String phoneNumber;
-    private final Date dateOfBirth;
-    private final String indexNumber;
+    private static int counter = 0;
+    private String name;
+    private String surname;
+    private String email;
+    private String address;
+    private String phoneNumber;
+    private LocalDate dateOfBirth;
+    private String indexNumber;
     private StudyProgramme studyProgramme;
     private String status;
     private int semester;
-    private final HashMap<String, Integer> grades = new HashMap<>();
-    private static final ArrayList<Student> students = new ArrayList<>();
+    private int ITN;
+    private HashMap<String, Integer> grades = new HashMap<>();
+    private static ArrayList<Student> students = new ArrayList<>();
 
-    public Student(String name, String surname, String email, String address, String phoneNumber, Date dateOfBirth) {
+    public Student(String name, String surname, String email, String address, String phoneNumber, LocalDate dateOfBirth, int ITN) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
-        this.indexNumber = "s" + (Main.counter == 7 ? Main.counter : ++Main.counter);
+        this.ITN = ITN;
+        this.indexNumber = "s" + (counter == 7 ? counter : ++counter);
         students.add(this);
     }
 
@@ -47,7 +50,7 @@ public class Student {
         return phoneNumber;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -67,6 +70,10 @@ public class Student {
         return semester;
     }
 
+    public int getITN() {
+        return ITN;
+    }
+
     public HashMap<String, Integer> getGrades() {
         return grades;
     }
@@ -84,7 +91,7 @@ public class Student {
     }
 
     public void enrollStudent(StudyProgramme studyProgramme) {
-        this.semester = (studyProgramme.semester() == 7 ? studyProgramme.semester() : studyProgramme.semester() + 1);
+        this.semester = (studyProgramme.getSemester() == 7 ? studyProgramme.getSemester() : studyProgramme.getSemester() + 1);
         this.status = this.semester == 1 ? "Candidate" : (this.semester == 7 ? "Graduate" : "Student");
         setStudyProgrammes(studyProgramme);
     }
@@ -93,7 +100,23 @@ public class Student {
         this.grades.put(subject, grade);
     }
 
-    @Deprecated
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public static void promoteAllStudents() {
+        for (Student student : students) {
+            if(student.getSemester() < student.getStudyProgramme().getSemester() && student.getITN() <= student.getStudyProgramme().getItn()) {
+                student.semester++;
+                student.status = "Student";
+            } else if (student.getSemester() == student.getStudyProgramme().getSemester()) {
+                student.status = "Graduate";
+            } else {
+                student.status = "Failed, so has ITN";
+            }
+        }
+    }
+
     public String toString() {
         return "Student " + this.getIndexNumber()
                 + "\nname: " + this.getName() + " " + this.getSurname()
@@ -101,10 +124,15 @@ public class Student {
                 + "\naddress: " + this.getAddress()
                 + "\nphone number:" + this.getPhoneNumber()
                 + "\ndate of birth: " + this.getDateOfBirth().getYear() + "." + this.getDateOfBirth().getMonth()
-                + "." + this.getDateOfBirth().getDate()
-                + "\nstudy programme: " + this.getStudyProgramme()
+                + "." + this.getDateOfBirth() + "\nstudy programme: " + this.getStudyProgramme()
                 + "\nstatus: " + this.getStatus()
                 + "\nsemester: " + this.getSemester()
                 + "\ngrades: " + this.getGrades();
+    }
+
+    public void displayInfoAboutAllStudents() {
+        for(Student student : students) {
+            System.out.println(student);
+        }
     }
 }
